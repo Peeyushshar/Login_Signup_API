@@ -355,6 +355,35 @@ router.post('/reset-password', async (req, res) => {
 });
 
 
+router.post('/sendURL', (req, res) => {
+  const userId = req.body.userId;
+  const url = req.body.url;
+  const title = req.body.title;
+  const tags = req.body.tags;
+  const category = req.body.category;
+  const actorNames = req.body.actorNames;
+  
+  const params = {
+    userId,
+    url,
+    title,
+    tags,
+    category,
+    actorNames
+  };
+
+  const data = axios.post(' https://x97scyi0sl.execute-api.ap-south-1.amazonaws.com/urlDownloader', params);
+
+  res.status(200).json({
+    message: "Your video is uploaded and is in processing",
+    status:"Pending"
+  });
+  
+});
+
+
+
+
 router.post('/get-dynamodb-data', (req, res) => {
   // Get the userId and url from the request body
   const { userId, url } = req.body;
